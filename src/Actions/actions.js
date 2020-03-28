@@ -11,7 +11,9 @@ export const actionInputValue = (name, text) => {
             return ({
                 type: C.ENTER_INPUT_2,
                 payload: text
-            })
+            });
+        default:
+            return
     }
 };
 
@@ -28,11 +30,32 @@ export const actionInsert = (name, text, money) => {
                 payload: text,
                 money
             });
-        case 3:
-            return ({
-                type: C.RESTORE_DEFAULT_VALUE,
-                payload: text
-            })
+
+        default:
+            return
     }
 };
 
+export const actionRestore = () => {
+    return dispatch => (
+        setTimeout(() => (
+            dispatch({ type: C.RESTORE_DEFAULT_VALUE })
+        ), 1000)
+    )
+};
+
+export const actionEnd = () => {
+    return dispatch => (
+        setTimeout(() => (
+            dispatch({ type: C.END })
+        ), 300)
+    )
+};
+
+export const actionReset = () => {
+    return dispatch => (
+        setTimeout(() => (
+            dispatch({ type: C.RESET })
+        ), 1500)
+    )
+};

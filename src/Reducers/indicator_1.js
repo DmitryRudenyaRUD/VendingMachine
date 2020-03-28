@@ -18,7 +18,7 @@ export const indicator_1 = (state = initialState, action) => {
             } else if([50, 100, 200, 500, 1000].find(i => i === +money)) {
                 if(+money + state.money >= 600) {
                     return {
-                        message_1: `Inserted money: ${state.money} R. Enough for any product.`,
+                        message_1: `Inserted money: ${state.money + +money} R. Enough for any product.`,
                         money: +money + state.money
                     }
                 } else {
@@ -42,6 +42,8 @@ export const indicator_1 = (state = initialState, action) => {
                 { ...state, message_1: `Inserted money: ${state.money} R. Enough for any product.`, }
             :
                        {...state, message_1: 'Insert banknotes...'};
+            case C.END:
+                return initialState;
         default:
             return state
     }

@@ -9,16 +9,15 @@ import {enterText} from './Reducers/enterText';
 import {products} from './Reducers/products';
 import thunk from 'redux-thunk';
 
-const storeFactory = () =>
-    applyMiddleware(thunk)(createStore)(combineReducers(
-            {
-                indicator_1,
-                indicator_2,
-                enterText,
-                products
-            }));
 
-const store = storeFactory(true);
+
+const store = createStore(combineReducers(
+    {
+        indicator_1,
+        indicator_2,
+        enterText,
+        products
+    }), applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>

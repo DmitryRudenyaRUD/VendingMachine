@@ -4,7 +4,13 @@ import {ControlPanel} from './Components/ControlPanel';
 import {OutputProduct} from './Components/OutputProduct';
 import {OutputIndicator} from './Components/OutputIndicator';
 import {ChangeCash} from './Components/ChangeCash';
-import {actionInputValue, actionInsert} from './Actions/actions';
+import {
+    actionInputValue,
+    actionInsert,
+    actionRestore,
+    actionEnd,
+    actionReset
+} from './Actions/actions';
 
 export const Showcase = connect(
     state => ({
@@ -28,6 +34,9 @@ export const ContainerControlPanel = connect(
         onSubmit(name, text, money) {
             dispatch(actionInsert(name, text, money))
         },
+        mapDispatchToRestore() {
+            dispatch(actionRestore())
+        }
     })
 )(ControlPanel);
 
@@ -37,14 +46,6 @@ export const ContainerOutputIndicator = connect(
     })
 )(OutputIndicator);
 
-export const ReleaseContainer = connect(
-    state => ({
-        products: state.products,
-        indicator_2: state.indicator_2,
-        enterText: state.enterText,
-    })
-)(OutputProduct);
-
 export const ContainerChangeCash = connect(
     state => ({
         indicator_1: state.indicator_1,
@@ -52,4 +53,21 @@ export const ContainerChangeCash = connect(
         enterText: state.enterText,
     })
 )(ChangeCash);
+
+export const ReleaseContainer = connect(
+    state => ({
+        products: state.products,
+        indicator_2: state.indicator_2,
+        enterText: state.enterText,
+    }),
+    dispatch => ({
+        end() {
+            dispatch(actionEnd())
+        },
+        reset() {
+            dispatch(actionReset())
+        }
+    })
+)(OutputProduct);
+
 

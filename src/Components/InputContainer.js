@@ -12,6 +12,9 @@ export class InputContainer extends React.Component {
     componentDidMount(){
         this.input.current.focus()
     }
+    componentDidUpdate() {
+        this.input.current.focus();
+    }
 
     valuePlaceholder() {
         return this.props.isDisabled ? '.' : '...';
@@ -20,10 +23,7 @@ export class InputContainer extends React.Component {
     handler(e) {
         e.preventDefault();
         this.props.onSubmit(this.props.id, this.props.value, this.props.money);
-        console.log(this.props.id, this.props.value, this.props.money);
-        setTimeout(() => {
-            this.props.onSubmit(3, null);
-        }, 1000)
+        this.props.restore();
     }
 
     render() {

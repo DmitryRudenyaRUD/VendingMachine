@@ -13,7 +13,7 @@ export const OutputProduct = (props) => {
             return (
                 <div
                     className={style.purchase}
-                    onClick={() => window.location.reload(false)}
+                    onClick={() => {props.end(); props.reset()}}
                 >
                     <p className={style.title}>{ title }</p>
                     <p className={style.descriptor}>{ descriptor }</p>

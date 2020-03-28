@@ -21,6 +21,8 @@ export const enterText = (state = initialState, action) => {
                     input__2: action.payload
                 }
             );
+        case C.END:
+            return initialState;
         default:
             return state
     }

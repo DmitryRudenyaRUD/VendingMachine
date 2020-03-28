@@ -2,9 +2,8 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
-
 }
-html{
+html {
   font-family:  Monaco, monospace;
   font-size: 16px;
 }
@@ -18,7 +17,8 @@ $text: #65e551;
 $text-input: #63e0ed;
 
 .app{
-  min-width: 64.5rem;
+  display:flex;
+  flex-direction: row;
 }
 .changeCash{
   align-items: center;
@@ -40,9 +40,9 @@ $text-input: #63e0ed;
 }
 
 .controlPanel{
-  position: relative;
-  width: 20rem;
-  float: right;
+  max-width: calc(100vw / 5 + 2 * 1.75rem);
+  flex-grow: 0;
+  max-height: calc(100vh - 2 * 1.75rem);
   overflow-y: auto;
   padding: 1.75rem;
   background-color: #1a1f15;
@@ -58,6 +58,9 @@ $text-input: #63e0ed;
 }
 .emptyLine{
   margin-bottom: 1rem;
+}
+.emptyLetter{
+  margin-left: 1rem;
 }
 
 @for $i from 1 through 7 {
@@ -112,11 +115,13 @@ $text-input: #63e0ed;
   color: $text-input;
 }
 .indicator{
+  max-width: 20rem;
   display: flex;
   align-items: center;
   height: 5.25rem;
   padding: 0 1rem 0 1rem;
   color: $text;
+  box-sizing: border-box;
   border: 0.125rem solid rgba(101, 229, 81, 0.4);
   border-radius: 0.25rem;
   background-image: -o-radial-gradient(#153817, #0a160d);
@@ -178,6 +183,11 @@ input:-moz-placeholder {
   font-size: 1.25rem;
 }
 
+@for $i from 1 through 50 {
+  .letter#{$i} {
+    animation: show #{0.1 + $i * 0.07}s 1;
+  }
+}
 
 .list{
   display: grid;
@@ -193,6 +203,7 @@ input:-moz-placeholder {
   grid-column-gap: 10px;
 }
 .outputProduct{
+  max-width: 10rem;
   @extend %for-release;
   padding: 0.75rem 0.5rem;
   line-height: 2.5rem;
@@ -225,14 +236,12 @@ input:-moz-placeholder {
 }
 
 .showcase {
-  position: fixed;
-  width: calc(100% - 20rem - 1.75rem * 4);
+  flex-grow: 5;
   min-width: 600px;
   height: calc(100vh - 1.75rem * 2);
   padding: 1.75rem;
   background-color: #141a0d;
 }
-
 .showcase__body{
   height: calc(100vh - 2rem * 2 - 1.75rem * 2);
   padding: 2rem 1.25rem;

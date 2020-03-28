@@ -29,6 +29,7 @@ export const ControlPanel = (props) => {
                 isDisabled={isDisabledInput(1)}
                 onChange={props.onChange}
                 onSubmit={props.onSubmit}
+                restore={props.mapDispatchToRestore}
                 value={input__1}
             />
             <div className={style.information}>
@@ -43,14 +44,19 @@ export const ControlPanel = (props) => {
                 isDisabled={isDisabledInput(2)}
                 onChange={props.onChange}
                 onSubmit={props.onSubmit}
+                restore={props.mapDispatchToRestore}
                 money={money}
                 value={input__2}
+
             />
             <div className={style.empty}/>
             <ContainerOutputIndicator />
             <div className={style.output}>
                 <ContainerChangeCash />
-                <ReleaseContainer />
+                <ReleaseContainer
+                    end={props.end}
+                    reset={props.reset}
+                />
             </div>
         </div>
     )
