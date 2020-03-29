@@ -1,16 +1,15 @@
 import React from 'react';
 import {Indicator} from './Indicator';
 import {InputContainer} from './InputContainer';
-import {
-    ReleaseContainer,
-    ContainerOutputIndicator,
-    ContainerChangeCash} from "../Containers";
+import {ChangeCash} from './ChangeCash';
+import {OutputProduct} from './OutputProduct';
 import style from './Component.module.scss';
 import PropTypes from "prop-types";
 
 export const ControlPanel = (props) => {
     const {message_1, money} = props.indicator_1;
     const {message_2} = props.indicator_2;
+    const {message_3} = props.indicator_3;
     const {input__1, input__2} = props.enterText;
 
     const isDisabledInput = (id) => {
@@ -45,17 +44,16 @@ export const ControlPanel = (props) => {
                 onChange={props.onChange}
                 onSubmit={props.onSubmit}
                 restore={props.mapDispatchToRestore}
-                money={money}
                 value={input__2}
-
             />
             <div className={style.empty}/>
-            <ContainerOutputIndicator />
+            <Indicator message={message_3}/>
             <div className={style.output}>
-                <ContainerChangeCash />
-                <ReleaseContainer
+                <ChangeCash change={props.change} />
+                <OutputProduct
                     end={props.end}
                     reset={props.reset}
+                    output={props.output}
                 />
             </div>
         </div>
@@ -64,5 +62,8 @@ export const ControlPanel = (props) => {
 ControlPanel.propTypes = {
     indicator_1: PropTypes.object,
     indicator_2: PropTypes.object,
+    indicator_3: PropTypes.object,
     enterText: PropTypes.object,
+    change: PropTypes.array,
+    output:  PropTypes.object
 };

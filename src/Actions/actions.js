@@ -17,7 +17,7 @@ export const actionInputValue = (name, text) => {
     }
 };
 
-export const actionInsert = (name, text, money) => {
+export const actionInsert = (name, text) => {
     switch (name) {
         case 1:
             return ({
@@ -25,11 +25,22 @@ export const actionInsert = (name, text, money) => {
                 payload: text,
             });
         case 2:
-            return ({
-                type: C.CHOOSE_PRODUCT,
-                payload: text,
-                money
-            });
+            return async (dispatch, getState) => {
+                await dispatch({
+                    type: C.CHOOSE_PRODUCT,
+                    payload: text,
+                    money: getState().indicator_1.money
+                });
+
+                if(getState().indicator_2.message_2 === 'Success!' ) {
+                    dispatch({
+                        type: C.PRODUCT_WAS_SELECTED,
+                        money: getState().indicator_1.money,
+                        purchase: getState().enterText.input__2,
+                        products: getState().products
+                    })
+                }
+            };
 
         default:
             return
@@ -39,7 +50,7 @@ export const actionInsert = (name, text, money) => {
 export const actionRestore = () => {
     return dispatch => (
         setTimeout(() => (
-            dispatch({ type: C.RESTORE_DEFAULT_VALUE })
+            dispatch({type: C.RESTORE_DEFAULT_VALUE})
         ), 1000)
     )
 };
@@ -47,7 +58,7 @@ export const actionRestore = () => {
 export const actionEnd = () => {
     return dispatch => (
         setTimeout(() => (
-            dispatch({ type: C.END })
+            dispatch({type: C.END})
         ), 300)
     )
 };
@@ -55,7 +66,7 @@ export const actionEnd = () => {
 export const actionReset = () => {
     return dispatch => (
         setTimeout(() => (
-            dispatch({ type: C.RESET })
-        ), 1500)
+            dispatch({type: C.RESET})
+        ), 3000)
     )
 };

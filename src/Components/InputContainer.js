@@ -22,7 +22,7 @@ export class InputContainer extends React.Component {
 
     handler(e) {
         e.preventDefault();
-        this.props.onSubmit(this.props.id, this.props.value, this.props.money);
+        this.props.onSubmit(this.props.id, this.props.value);
         this.props.restore();
     }
 
